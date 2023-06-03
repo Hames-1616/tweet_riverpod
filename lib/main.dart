@@ -27,7 +27,8 @@ class MyApp extends ConsumerWidget {
             return const HomeView();
           }
           return const SignUpView();
-        }, error: (error,stk){
+        },
+         error: (error,stk){
           Error_page(error: error.toString());
         }, loading: ()=> const loader()),
     );
