@@ -1,0 +1,1 @@
+account are of two types one for models(appwrite/models) and other for authentication(appwrite/appwrite)

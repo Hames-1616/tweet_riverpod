@@ -1,0 +1,34 @@
+riverpod has multiple providers with each provider providing something
+
+Widget ref is an objects that lets widgets communicate/interact with the providers
+
+1. provider -> read only can provide classes widgest etc
+provider ref allows us to talk with other providers
+in order to access the provider we can use consumer widget
+and in consumerwidget we have to use widget ref that is used to contact with other providers refs 	
+
+there are two types of reading 
+using consumer widget or consumerstateful widget
+using stateless and builder Consumer
+
+ref.watch -> read continuously
+ref.read -> read once
+we can use select with watch when we want to update the widget incase of single property update 
+
+consumer builder can be used if we only some part of the widget is dependent on the data on that we can use only consumer
+because upon reciving a change the widget will be rebuild in case of consumer widget whole scaffold is rebuild
+
+
+2. stateprovider is used to update the value that we cant perfrom in normal provider so it is an upgrade
+by default all the providers are immutable so here in case of stateprovider we can directly change the value but with the help of the
+notifier method we can do it with using update
+it is used for simple values like int double etc 
+
+3. for complex values(handling classes , maps ) we will be using 3rd type of provider called stateNotifier and statenotifier provider
+
+4.change notifier provider(should not be use much)
+
+5.Future Provider 
+provider based on http codes or Future values like eg firebase data , better and shorter code for future builder
+
+6.streamProvider
