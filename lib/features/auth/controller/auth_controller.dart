@@ -67,7 +67,7 @@ class AuthController extends StateNotifier<bool> {
       UserModel usermodel = UserModel(
       email: email,
        name: getnameFromEmail(email),
-        followers: const [], following: const [], profilePic: '', coverPhoto: '', uid: '', bio: '', isBlue: false) ;
+        followers: const [], following: const [], profilePic: '', coverPhoto: '', uid: r.$id, bio: '', isBlue: false) ;
 
       final result = await _userApi.saveUserData(usermodel);
       result.fold((l){

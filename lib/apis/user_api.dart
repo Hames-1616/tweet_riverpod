@@ -27,7 +27,7 @@ UserApi({
   @override
   FutureEitherVoid saveUserData(UserModel usermodel) async{
     try{
-     await _db.createDocument(databaseId: AppwriteConstants.databaseId, collectionId: AppwriteConstants.collectionId, documentId: ID.unique(), data: usermodel.toMap());
+     await _db.createDocument(databaseId: AppwriteConstants.databaseId, collectionId: AppwriteConstants.collectionId, documentId: usermodel.uid, data: usermodel.toMap());
     return right(null);
     }
     on AppwriteException catch(e,stk)

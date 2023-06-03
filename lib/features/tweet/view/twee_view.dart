@@ -33,7 +33,7 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
         child: Column(children: [
          Row(
           children: [
-            CircleAvatar(backgroundImage: NetworkImage(currentUser.coverPhoto),)
+             CircleAvatar(backgroundImage: NetworkImage(currentUser.coverPhoto),)
           ],
          )
         ]),
