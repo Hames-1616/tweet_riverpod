@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,7 +82,17 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
                 ),
               )
           ],
-         )
+         ),
+         if(images.isNotEmpty)
+          CarouselSlider(
+            items:images.map(
+              (file) {
+              return Image.file(file);
+            }).toList(), 
+           options: CarouselOptions(
+            enableInfiniteScroll: true,
+            height: 450
+           ))
         ]),
       )),
       bottomNavigationBar: Container(
