@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:riverpod_learning/common/loading_page.dart';
 import 'package:riverpod_learning/common/rounded_smol_buttton.dart';
 import 'package:riverpod_learning/constants/assets_constants.dart';
+import 'package:riverpod_learning/core/utils.dart';
 import 'package:riverpod_learning/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_learning/theme/theme.dart';
 
@@ -16,6 +19,16 @@ class CreateTweet extends ConsumerStatefulWidget {
 }
 
 class _CreateTweetState extends ConsumerState<CreateTweet> {
+
+  List<File> images=[];
+  void onPickImages()
+  async{
+    images = await pickimages();
+    setState(() {
+      
+    });//for rebuilding the widget
+  }
+
   final tweettextController = TextEditingController();
 
   @override
@@ -88,7 +101,9 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
                 left: 15,
                 right: 15
               ),
-              child: SvgPicture.asset(AssetsConstants.galleryIcon),
+              child: GestureDetector(
+                onTap: onPickImages,
+                child: SvgPicture.asset(AssetsConstants.galleryIcon)),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0).copyWith(
