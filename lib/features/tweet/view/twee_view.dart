@@ -58,6 +58,7 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
         Column(children: [
          Row(
           children: [
+            const SizedBox(width: 15,),
              CircleAvatar(
               radius: 30,
               backgroundImage: NetworkImage(currentUser.profilePic),),
@@ -87,10 +88,13 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
           CarouselSlider(
             items:images.map(
               (file) {
-              return Image.file(file);
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                width: MediaQuery.of(context).size.width,
+                child: Image.file(file));
             }).toList(), 
            options: CarouselOptions(
-            enableInfiniteScroll: true,
+             enableInfiniteScroll: true,
             height: 450
            ))
         ]),

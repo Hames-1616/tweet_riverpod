@@ -15,11 +15,15 @@ class Roundedsmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Chip(label: Text(label,style: TextStyle(color: txtcolor,fontSize: 15),), 
-      backgroundColor: bgcolor,
-      labelPadding: const EdgeInsets.symmetric(vertical:5.0 ,horizontal: 20.0),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Chip(
+          label: Text(label,style: TextStyle(color: txtcolor,fontSize: 15),), 
+        backgroundColor: bgcolor,
+        labelPadding: const EdgeInsets.symmetric(vertical:5.0 ,horizontal: 20.0),
+        ),
       ),
     );
   }
