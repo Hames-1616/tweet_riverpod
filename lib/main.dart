@@ -6,6 +6,7 @@ import 'package:riverpod_learning/features/auth/controller/auth_controller.dart'
 import 'package:riverpod_learning/features/auth/view/signup_view.dart';
 import 'package:riverpod_learning/features/home/view/home_view.dart';
 import 'package:riverpod_learning/theme/app_theme.dart';
+import 'package:riverpod_learning/test.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -20,18 +21,19 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      home: ref.watch(currentuseraccountProvider).when(
-        data: (data){
-          if(data!=null)
-          {
-            return const HomeView();
-          }
-          return const SignUpView();
-        },
-         error: (error,stk){
+      home: desgin(),
+      // home: ref.watch(currentuseraccountProvider).when(
+      //   data: (data){
+      //     if(data!=null)
+      //     {
+      //       return const HomeView();
+      //     }
+      //     return const SignUpView();
+      //   },
+      //    error: (error,stk){
           
-          Error_page(error: error.toString());
-        }, loading: ()=> const loader()),
+      //     Error_page(error: error.toString());
+      //   }, loading: ()=> const loader()),
     );
   }
 }
