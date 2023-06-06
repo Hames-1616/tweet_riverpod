@@ -21,19 +21,19 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      home: desgin(),
-      // home: ref.watch(currentuseraccountProvider).when(
-      //   data: (data){
-      //     if(data!=null)
-      //     {
-      //       return const HomeView();
-      //     }
-      //     return const SignUpView();
-      //   },
-      //    error: (error,stk){
+      
+      home: ref.watch(currentuseraccountProvider).when(
+        data: (data){
+          if(data!=null)
+          {
+            return const HomeView();
+          }
+          return const SignUpView();
+        },
+         error: (error,stk){
           
-      //     Error_page(error: error.toString());
-      //   }, loading: ()=> const loader()),
+          Error_page(error: error.toString());
+        }, loading: ()=> const loader()),
     );
   }
 }
