@@ -9,6 +9,12 @@ import 'package:riverpod_learning/core/utils.dart';
 import 'package:riverpod_learning/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_learning/models/tweet_model.dart';
 
+
+
+final getTweetsProvider = FutureProvider((ref) {
+  return ref.watch(tweetControllerProvider.notifier).gettweets();
+});
+
 final tweetControllerProvider = StateNotifierProvider<TweetController,bool>((ref) {
   return TweetController(tweetapi: ref.watch(tweetapiProvider), ref: ref,storageApi: ref.watch(storageApiProvider));
 });
@@ -27,6 +33,12 @@ class TweetController extends StateNotifier<bool> {
       required StorageApi storageApi
     }
   ) : _tweetapi=tweetapi,_ref =ref,_storageApi = storageApi ,super(false);
+
+
+  Future<List<Tweet>> gettweets() async{
+    final tweetsList = await _tweetapi.getTweets(); 
+     return tweetsList.map((tweet) => Tweet.fromMap(tweet.data)).toList();
+  }
 
   void shareTweet(
       {required List<File> images,

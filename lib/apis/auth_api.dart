@@ -31,11 +31,11 @@ class Authapi implements IauthAPI {
     try{
        return await _account.get();
     }
-    on AppwriteException catch(e,stackTrace)
+    on AppwriteException catch(e)
     {
       return null;
     }
-    catch(e,stackTrace){
+    catch(e){
       return null;
     }
   }
