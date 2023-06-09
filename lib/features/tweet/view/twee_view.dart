@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:riverpod_learning/common/loading_page.dart';
 import 'package:riverpod_learning/common/rounded_smol_buttton.dart';
 import 'package:riverpod_learning/constants/assets_constants.dart';
-import 'package:riverpod_learning/core/providers.dart';
 import 'package:riverpod_learning/core/utils.dart';
 import 'package:riverpod_learning/features/auth/controller/auth_controller.dart';
 import 'package:riverpod_learning/features/tweet/controller/tweet_controller.dart';
