@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+
 
 import 'package:flutter/foundation.dart';
 
@@ -71,7 +71,6 @@ class Tweet {
     result.addAll({'tweetedAt': tweetedAt.millisecondsSinceEpoch});
     result.addAll({'likes': likes});
     result.addAll({'commentIds': commentIds});
-    result.addAll({'id': id});
     result.addAll({'reshareCount': reshareCount});
   
     return result;
@@ -84,19 +83,14 @@ class Tweet {
       link: map['link'] ?? '',
       imageLinks: List<String>.from(map['imageLinks']),
       uid: map['uid'] ?? '',
-      tweetType: TweetType.fromMap(map['tweetType']),
+      tweetType: (map['tweetType']as String).totweetTypeEnum(),
       tweetedAt: DateTime.fromMillisecondsSinceEpoch(map['tweetedAt']),
       likes: List<String>.from(map['likes']),
       commentIds: List<String>.from(map['commentIds']),
-      id: map['id'] ?? '',
+      id: map['\$id'] ?? '',
       reshareCount: map['reshareCount']?.toInt() ?? 0,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Tweet.fromJson(String source) => Tweet.fromMap(json.decode(source));
-
   @override
   String toString() {
     return 'Tweet(text: $text, hastags: $hastags, link: $link, imageLinks: $imageLinks, uid: $uid, tweetType: $tweetType, tweetedAt: $tweetedAt, likes: $likes, commentIds: $commentIds, id: $id, reshareCount: $reshareCount)';

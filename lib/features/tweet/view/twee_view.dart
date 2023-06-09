@@ -9,6 +9,7 @@ import 'package:riverpod_learning/common/rounded_smol_buttton.dart';
 import 'package:riverpod_learning/constants/assets_constants.dart';
 import 'package:riverpod_learning/core/utils.dart';
 import 'package:riverpod_learning/features/auth/controller/auth_controller.dart';
+import 'package:riverpod_learning/features/tweet/controller/tweet_controller.dart';
 import 'package:riverpod_learning/theme/theme.dart';
 
 class CreateTweet extends ConsumerStatefulWidget {
@@ -20,7 +21,6 @@ class CreateTweet extends ConsumerStatefulWidget {
 }
 
 class _CreateTweetState extends ConsumerState<CreateTweet> {
-
   List<File> images=[];
   void onPickImages()
   async{
@@ -28,6 +28,9 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
     setState(() {
       
     });//for rebuilding the widget
+  }
+  void shareTweet(){
+    ref.read(tweetControllerProvider.notifier).shareTweet(images: images, text: tweettextController.text, context: context);
   }
 
   final tweettextController = TextEditingController();
@@ -39,8 +42,9 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
   }
   @override
   Widget build(BuildContext context) {
-    final currentUser = ref.watch(currentUserDataProvider).value;
     
+    final currentUser = ref.watch(currentUserDataProvider).value;
+    final isloading = ref.watch(tweetControllerProvider);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: (){
@@ -48,11 +52,11 @@ class _CreateTweetState extends ConsumerState<CreateTweet> {
         }, icon: const Icon(Icons.close,color: Pallete.whiteColor,)),
         actions: [
           
-          Roundedsmall(onTap: (){}, label: "Tweet", bgcolor: Pallete.blueColor, txtcolor: Pallete.whiteColor)
+          Roundedsmall(onTap: shareTweet, label: "Tweet", bgcolor: Pallete.blueColor, txtcolor: Pallete.whiteColor)
         ],
       ),
       body: 
-      currentUser == null?const loader() 
+      isloading||currentUser == null?const loader() 
       :SafeArea(child: SingleChildScrollView(
         child: 
         Column(children: [
