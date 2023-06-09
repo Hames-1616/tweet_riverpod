@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_learning/apis/storage_api.dart';
 import 'package:riverpod_learning/apis/tweet_api.dart';
 import 'package:riverpod_learning/core/enums/tweet_type_enum.dart';
 import 'package:riverpod_learning/core/utils.dart';
@@ -9,21 +10,23 @@ import 'package:riverpod_learning/features/auth/controller/auth_controller.dart'
 import 'package:riverpod_learning/models/tweet_model.dart';
 
 final tweetControllerProvider = StateNotifierProvider<TweetController,bool>((ref) {
-  return TweetController(tweetapi: ref.watch(tweetapiProvider), ref: ref);
+  return TweetController(tweetapi: ref.watch(tweetapiProvider), ref: ref,storageApi: ref.watch(storageApiProvider));
 });
 
 
 
 
 class TweetController extends StateNotifier<bool> {
+  final StorageApi _storageApi;
   final TweetApi _tweetapi;
   final Ref _ref;
   TweetController(
     {
       required TweetApi tweetapi,
-      required Ref ref
+      required Ref ref,
+      required StorageApi storageApi
     }
-  ) : _tweetapi=tweetapi,_ref =ref ,super(false);
+  ) : _tweetapi=tweetapi,_ref =ref,_storageApi = storageApi ,super(false);
 
   void shareTweet(
       {required List<File> images,
@@ -47,7 +50,8 @@ class TweetController extends StateNotifier<bool> {
     state = true;
     final hastags = getHastags(text);
     String link = getLinkFromText(text);
-    Tweet tweet = Tweet(text: text, hastags: hastags, link: link, imageLinks: [], uid: user.uid, tweetType: TweetType.image, tweetedAt: DateTime.now(), likes: [], commentIds: [], id: '', reshareCount: 0);
+    final imageLinks = await _storageApi.uploadImage(images);
+    Tweet tweet = Tweet(text: text, hastags: hastags, link: link, imageLinks: imageLinks, uid: user.uid, tweetType: TweetType.image, tweetedAt: DateTime.now(), likes: [], commentIds: [], id: '', reshareCount: 0);
     final res = await _tweetapi.sharetweet(tweet);
     state = false;
     res.fold((l) => showSnackBar(context,l.message), (r) => null);
