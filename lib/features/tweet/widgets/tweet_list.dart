@@ -4,6 +4,7 @@ import 'package:riverpod_learning/common/Error_page.dart';
 import 'package:riverpod_learning/common/loading_page.dart';
 import 'package:riverpod_learning/core/utils.dart';
 import 'package:riverpod_learning/features/tweet/controller/tweet_controller.dart';
+import 'package:riverpod_learning/features/tweet/widgets/tweet_card.dart';
 
 class TweetList extends ConsumerWidget {
   const TweetList({super.key});
@@ -16,7 +17,7 @@ class TweetList extends ConsumerWidget {
               itemCount: tweets.length,
               itemBuilder: (context, index) {
                 final tweet = tweets[index];
-                return Text(tweet.text);
+                return tweetCard(tweet: tweet);
               });
         },
         error: (e, st) {
