@@ -41,7 +41,7 @@ class TweetApi implements Itweetapi{
     
       @override
       Future<List<Document>> getTweets() async{
-        final docs = await _db.listDocuments(databaseId:AppwriteConstants.databaseId, collectionId: AppwriteConstants.collectionId);
+        final docs = await _db.listDocuments(databaseId:AppwriteConstants.databaseId, collectionId: AppwriteConstants.tweetCollectiton);
         return docs.documents;
       }
 

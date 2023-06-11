@@ -20,6 +20,7 @@ class TweetList extends ConsumerWidget {
               });
         },
         error: (e, st) {
+          
           return Error_text(error: e.toString());
         },
         loading: () => const loader());
