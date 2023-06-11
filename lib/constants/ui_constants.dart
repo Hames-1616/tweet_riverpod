@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:riverpod_learning/features/tweet/widgets/tweet_list.dart';
 import 'package:riverpod_learning/theme/pallete.dart';
 
 import 'assets_constants.dart';
@@ -15,7 +16,7 @@ class UIconstants{
   }
 
   static List<Widget>bottomPages=[
-    const Text("First page"),
+    const TweetList(),
     const Text("Second Page"),
     const Text("3rd Page")
   ];
